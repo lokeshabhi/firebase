@@ -1,82 +1,14 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <title>Sample CRUD Firebase Javascript - 01 Read Data</title>
-  </head>
-  <style>
-    body,
-    h1,
-    h2 {
-      margin: 0;
-      padding: 0;
-    }
-    body {
-      background: #039be5;
-      font-family: Arial, sans-serif;
-    }
-    h1 {
-      padding: 10px;
-      background: #ffcc00;
-    }
-    /*---------------------------*/ /* Read Users */ /*---------------------------*/
-    #userList {
-      margin: 0;
-      padding: 0;
-      width: 200px;
-      float: left;
-      margin: 10px;
-      border: 1px solid #4fc3fc;
-    }
-    #userList h2 {
-      padding: 10px;
-      margin: 0;
-      color: white;
-    }
-    #userList li {
-      padding: 5px 10px;
-      border-top: 1px solid #4fc3fc;
-      cursor: pointer;
-      color: white;
-      font-style: italic;
-    }
-    #userList li:hover {
-      background: #4fc3fc;
-    }
-    #userDetail {
-      float: left;
-      width: 200px;
-      margin: 10px;
-      margin-left: 0;
-      padding: 10px;
-      border: 1px solid #4fc3fc;
-      color: white;
-    }
-  </style>
-  <body>
-    <h1>
-      Firebase CRUD with Vanilla Javascript
-      <br />
-      <small>
-        <em>01 Read Data</em>
-      </small>
-    </h1>
-    <ul id="userList"></ul>
-    <div id="userDetail">
-      <p>
-        Name :
-        <strong class="detailName"></strong>
-      </p>
-      <p>
-        Age:
-        <strong class="detailAge"></strong>
-      </p>
-      <p>
-        Email:
-        <strong class="detailEmail"></strong>
-      </p>
-    </div>
-    <script src="index.js"></script>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home page</title>
+</head>
+<body>
+    <h1>logged in</h1>
+<script src="index.js"></script>
     <!-- firebase sdk link goes here -->
     <script type="module">
       // Import the functions you need from the SDKs you need
@@ -96,19 +28,40 @@
 
       // Initialize Firebase
       const app = initializeApp(firebaseConfig);
-      import { getDatabase, ref, set } from "firebase/database";
+      import { getDatabase, ref, set , get, child, update, remove} 
+      from "https://www.gstatic.com/firebasejs/9.12.1/firebase-database.js";
 
-      function writeUserData(userId, name, email, imageUrl) {
-        const db = getDatabase();
-        console.log(db);
-        set(ref(db, "users/" + userId), {
-          username: name,
-          email: email,
-          profile_picture: imageUrl,
-        });
-      }
+      const db = getDatabase();
 
-      writeUserData(1, "krishna", "krish@gmail.com", "none");
-    </script>
-  </body>
+    //   insert data
+    function inSertData(){
+        set(ref(db, "users/"+ 0),
+        {
+            name:"krishna"
+        })
+        .then(() =>{
+            alert("data stored successfully");
+        })
+        .catch((error)=>
+        {
+            alert("unsuccessful",error);
+        })
+    }
+
+    //read data
+    function readData(){
+        const dbref = ref(db);
+        get (child(dbref, "users/" + 1)).then((snapshot)=>
+        {
+            if(snapshot.exists())
+            {
+                console.log(snapshot.val().age);
+                console.log(snapshot.val().name);
+                console.log(snapshot.val().email);
+            }
+        })
+    }
+    readData();
+</script>
+</body>
 </html>
