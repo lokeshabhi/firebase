@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta
+      name="krishna"
+      content="Mark Otto, Jacob Thornton, and Bootstrap contributors"
+    />
+    <meta name="generator" content="Hugo 0.104.2" />
+    <!-- CSS only -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous"
+    />
+    <title>Firebase Login</title>
+
+    <meta name="theme-color" content="#712cf9" />
+    <!-- Custom styles for this template -->
+    <link href="styles.css" rel="stylesheet" />
+  </head>
+  <body class="text-center">
+    <main class="form-signin w-100 m-auto">
+      <form>
+        <img
+          class="mb-4"
+          src="images/logo.png"
+          alt=""
+          width="220"
+          height="100"
+        />
+        <h1 class="h3 mb-3 fw-normal"><strong>Please sign in</strong></h1>
+
+        <div class="form-floating">
+          <input
+            type="email"
+            class="form-control"
+            id="floatingInput"
+            placeholder="name@example.com"
+            required
+          />
+          <label for="floatingInput">Email address</label>
+        </div>
+        <div class="form-floating">
+          <input
+            type="password"
+            class="form-control"
+            id="floatingPassword"
+            placeholder="Password"
+            required
+          />
+          <label for="floatingPassword">Password</label>
+        </div>
+        <button class="w-100 btn btn-lg btn-primary" type="button">
+          Sign in
+        </button>
+        <p class="mt-5 mb-3 text-muted">&copy; 2022–2023</p>
+      </form>
+    </main>
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-app.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyCaWvndjmrZ2lGArUUxF_vDW_BYPOWnZtY",
+        authDomain: "projects-list-b6bfc.firebaseapp.com",
+        projectId: "projects-list-b6bfc",
+        storageBucket: "projects-list-b6bfc.appspot.com",
+        messagingSenderId: "1070207882038",
+        appId: "1:1070207882038:web:f79986848f3c1810105997",
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      import {
+        getDatabase,
+        ref,
+        set,
+        get,
+        child,
+        update,
+        remove,
+      } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-database.js";
+
+      const db = getDatabase();
+
+
+      //read data
+      function readData() {
+        const dbref = ref(db);
+        get(child(dbref, "users")).then((snapshot) => {
+            console.log("inside read function");
+            if(snapshot.exists())
+            {
+                if(snapshot.val().email === uemail && snapshot.val().pass === upass )
+                {
+                    window.open("home.html", "_self");
+                }
+                else{
+                    alert("Incorrect Details Try Again");
+                    document.querySelector("#floatingInput").value = "";
+                    document.querySelector("#floatingPassword").value = "";
+                }
+            }
+      })
+    };
+      //get form data
+      var uemail;
+      var upass;
+      document.querySelector(".btn").addEventListener("click", function () {
+        uemail = document.querySelector("#floatingInput").value;
+        upass = document.querySelector("#floatingPassword").value;
+        if(uemail.length === 0 || upass.length === 0){
+            alert("Enter Username And Password")
+        }
+        else{
+            readData();
+        }
+      });
+ 
+    </script>
+  </body>
+</html>
