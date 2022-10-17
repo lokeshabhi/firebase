@@ -4,64 +4,76 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>home page</title>
+    <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+    crossorigin="anonymous"
+    />
+    <title>Home</title>
 </head>
 <body>
-    <h1>logged in</h1>
-<script src="index.js"></script>
-    <!-- firebase sdk link goes here -->
-    <script type="module">
-      // Import the functions you need from the SDKs you need
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-app.js";
-      // TODO: Add SDKs for Firebase products that you want to use
-      // https://firebase.google.com/docs/web/setup#available-libraries
-
-      // Your web app's Firebase configuration
-      const firebaseConfig = {
-        apiKey: "AIzaSyCaWvndjmrZ2lGArUUxF_vDW_BYPOWnZtY",
-        authDomain: "projects-list-b6bfc.firebaseapp.com",
-        projectId: "projects-list-b6bfc",
-        storageBucket: "projects-list-b6bfc.appspot.com",
-        messagingSenderId: "1070207882038",
-        appId: "1:1070207882038:web:f79986848f3c1810105997",
-      };
-
-      // Initialize Firebase
-      const app = initializeApp(firebaseConfig);
-      import { getDatabase, ref, set , get, child, update, remove} 
-      from "https://www.gstatic.com/firebasejs/9.12.1/firebase-database.js";
-
-      const db = getDatabase();
-
-    //   insert data
-    function inSertData(){
-        set(ref(db, "users/"+ 0),
-        {
-            name:"krishna"
+    <div class="b-example-divider"></div>
+    <header class="p-3 text-bg-dark">
+      <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+          <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+            <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
+          </a>
+  
+          <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+            <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
+            <li><a href="#" class="nav-link px-2 text-white">Features</a></li>
+            <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
+            <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
+            <li><a href="#" class="nav-link px-2 text-white">About</a></li>
+          </ul>
+  
+          <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+            <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search">
+          </form>
+  
+          <div class="text-end">
+            <button type="button" class="btn btn-outline-light me-2"><a class="nav-link" href="index.html" target="_self">Logout</a></button>
+          </div>
+        </div>
+      </div>
+    </header>
+    <table class="table table-hover" style="margin-top:2rem;">
+        <thead class="text-bg-dark">
+          <tr>
+            <th scope="col">Sl.No</th>
+            <th scope="col">Batch No</th>
+            <th scope="col">Project Name</th>
+            <th scope="col">Last-RunTime</th>
+            <th scope="col">ON/OFF</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+            <td><button type="button" class="onoff btn btn-outline-dark me-2"><a class="nav-link" href="#" target="_self">ON/OFF</a></button></td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td colspan="2">Larry the Bird</td>
+            <td>@twitter</td>
+          </tr>
+        </tbody>
+      </table>
+      <script>
+        document.querySelector(".onoff").addEventListener("click",function(){
+          alert("button pressed");  
         })
-        .then(() =>{
-            alert("data stored successfully");
-        })
-        .catch((error)=>
-        {
-            alert("unsuccessful",error);
-        })
-    }
-
-    //read data
-    function readData(){
-        const dbref = ref(db);
-        get (child(dbref, "users/" + 1)).then((snapshot)=>
-        {
-            if(snapshot.exists())
-            {
-                console.log(snapshot.val().age);
-                console.log(snapshot.val().name);
-                console.log(snapshot.val().email);
-            }
-        })
-    }
-    readData();
-</script>
+      </script>
 </body>
 </html>
